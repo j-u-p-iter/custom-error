@@ -37,3 +37,14 @@ The throw operator generates an error.
 Technically, we can use anything as an error object. That may be even a primitive, like a number or a string, but it’s better to use objects, preferably with name and message properties (to stay somewhat compatible with built-in errors).
 
 For built-in errors (not for any objects, just for errors), the name property is exactly the name of the constructor. And message is taken from the argument.
+
+## Global catch
+
+Let’s imagine we’ve got a fatal error outside of try..catch, and the script stops execution. Like a programming error or some other terrible thing.
+
+Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don’t see error messages), etc.
+
+Different environments usually provide the way to handle such type of uncaught errors:
+
+- Node.js has `process.on("uncaughtException")` for that.
+- And in the browser we can assign a function to the special `window.onerror` property.
