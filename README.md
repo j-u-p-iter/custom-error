@@ -70,6 +70,7 @@ When we create custom error classes, we:
 - custom errors should extend from base Error class. We should be able to detect them by `instanceof Error`
 - custom errors should support basic error properties, base Error class supports: `message`, `name`, `stack`
 - custom errors shouldn't contain in stack internal implementation details, like CustomError class or functions-creators we can use to create custom class instances.
+- custom errors should be extendable. For this purpose we should be able
 
 Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like 404 or 403 or 500.
 
