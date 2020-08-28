@@ -65,6 +65,12 @@ When we create custom error classes, we:
 - get much more descriptive errors. With such types of errors it's much easier to detect the reason and the place of an error;
 - handle errors more carefully, that will allow us to understand code we write much better.
 
+## Requirements for Custom Errors
+
+- custom errors should extend from base Error class. We should be able to detect them by `instanceof Error`
+- custom errors should support basic error properties, base Error class supports: `message`, `name`, `stack`
+- custom errors shouldn't contain in stack internal implementation details, like CustomError class or functions-creators we can use to create custom class instances.
+
 Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like 404 or 403 or 500.
 
 JavaScript allows to use throw with any argument, so technically our custom error classes don’t need to inherit from `Error`. But if we inherit, then it becomes possible to use obj instanceof Error to identify error objects. So it’s better to inherit from it.
