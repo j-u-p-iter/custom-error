@@ -51,10 +51,26 @@ Different environments usually provide the way to handle such type of uncaught e
 
 ## Problem
 
-When we develop something, we often need our own error classes to reflect specific things that may go wrong in our tasks:
+We handle all error cases similarly, using one common Error class. As result in logs all these errors looks absolutely the same, that requires from us spend 
+additional time to detect the reason of an issue.
+
+## Solution
+
+We can create custom classes for all main categories of errors:
 - for errors in network operations we may need `HttpError`;
 - for database operations `DbError`;
 - for searching operations `NotFoundError` and so on.
+
+When we create custom error classes, we:
+- get much more descriptive errors. With such types of errors it's much easier to detect the reason and the place of an error;
+- handle errors more carefully, that will allow us to understand code we write much better.
+
+## Requirements for Custom Errors
+
+- custom errors should extend from base Error class. We should be able to detect them by `instanceof Error`
+- custom errors should support basic error properties, base Error class supports: `message`, `name`, `stack`
+- custom errors shouldn't contain in stack internal implementation details, like CustomError class or functions-creators we can use to create custom class instances.
+- custom errors should be extendable. For this purpose we should be able
 
 Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like 404 or 403 or 500.
 
