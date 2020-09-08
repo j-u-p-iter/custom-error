@@ -21,14 +21,7 @@ export interface CustomErrorConfig {
  * @param {function} [config.excludeFromStack] A callback you need to exclude from the result stack.
  *
  * @example
- * class HTTPError extends CustomError {
- *   constructor(message: string, config: CustomErrorConfig) {
- *     super(message, config)
- *     this.name = 'HTTPError';
- *   }
- * }
- *
- * new HTTPError('Request data is incorrect', { code: 400 })
+ * new CustomError('Some error has happened');
  */
 
 export class CustomError extends Error implements CustomErrorInterface {
