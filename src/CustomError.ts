@@ -19,6 +19,14 @@ export interface CustomErrorConfig {
  * @param {number} [config.code] HTTP status code.
  *   [Available HTTP status codes]{@link https://github.com/j-u-p-iter/http-status/blob/master/docs/API.md}
  * @param {function} [config.excludeFromStack] A callback you need to exclude from the result stack.
+ *
+ * @example
+ * class HTTPError extends CustomError {
+ *   constructor(message: string, config: CustomErrorConfig) {
+ *     super(message, config)
+ *     this.name = 'HTTPError';
+ *   }
+ * }
  */
 
 export class CustomError extends Error implements CustomErrorInterface {
