@@ -77,3 +77,7 @@ Our errors should support basic error properties like `message`, `name` and, pre
 JavaScript allows to use throw with any argument, so technically our custom error classes don’t need to inherit from `Error`. But if we inherit, then it becomes possible to use obj instanceof Error to identify error objects. So it’s better to inherit from it.
 
 As the application grows, our own errors naturally form a hierarchy. For instance, HttpTimeoutError may inherit from HttpError, and so on.
+
+## API
+
+Detailed API can be found [here](https://github.com/j-u-p-iter/custom-error/blob/master/docs/API.md).
