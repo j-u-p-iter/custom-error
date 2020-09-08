@@ -1,24 +1,30 @@
-interface Data {
-  [key: string]: string | number;
-}
-
 interface CustomErrorInterface {
   name: string;
   date: string;
   code?: number;
-  data?: Data;
 }
 
 export interface CustomErrorConfig {
   code?: number;
-  data?: Data;
   excludeFromStack?: Function;
 }
+
+/**
+ * Create a CustomError object
+ *
+ * @class
+ *
+ * @param {string} message An error message
+ * @param {object} [config] A configuration object
+ * @param {number} [config.code] HTTP status code. 
+ *   @see [Available HTTP status codes]{@link https://github.com/j-u-p-iter/http-status/blob/master/docs/API.md} 
+ * @param {excludeFromStack} [callback] A callback you need to exclude from the result stack.
+ */
 
 export class CustomError extends Error implements CustomErrorInterface {
   public date;
 
-  constructor(message: string, config: CustomErrorConfig) {
+  constructor(message: string, config?: CustomErrorConfig) {
     super(message);
 
     this.name = 'CustomError';
