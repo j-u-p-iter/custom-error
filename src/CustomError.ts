@@ -27,6 +27,8 @@ export interface CustomErrorConfig {
  *     this.name = 'HTTPError';
  *   }
  * }
+ *
+ * new HTTPError('Request data is incorrect', { code: 400 })
  */
 
 export class CustomError extends Error implements CustomErrorInterface {

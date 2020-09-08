@@ -17,5 +17,5 @@ Create a CustomError object
 
 **Example**  
 ```js
-class HTTPError extends CustomError {  constructor(message: string, config: CustomErrorConfig) {    super(message, config)    this.name = 'HTTPError';  }}
+class HTTPError extends CustomError {  constructor(message: string, config: CustomErrorConfig) {    super(message, config)    this.name = 'HTTPError';  }}new HTTPError('Request data is incorrect', { code: 400 })
 ```
