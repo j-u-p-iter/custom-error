@@ -80,4 +80,4 @@ As the application grows, our own errors naturally form a hierarchy. For instanc
 
 ## API
 
-Detaile API can be found [here](https://github.com/j-u-p-iter/custom-error/blob/master/docs/API.md).
+Detailed API can be found [here](https://github.com/j-u-p-iter/custom-error/blob/master/docs/API.md).
