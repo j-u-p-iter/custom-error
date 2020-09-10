@@ -51,26 +51,30 @@ Different environments usually provide the way to handle such type of uncaught e
 
 ## Problem
 
-We handle all error cases similarly, using one common Error class. As result in logs all these errors looks absolutely the same, that requires from us spend 
-additional time to detect the reason of an issue.
+We handle all error cases similarly, using one common Error class. As result:
+- in logs all these errors looks absolutely the same, that requires from us spend additional time to detect the reason of an issue;
+- we can't detect properly the type of an error, using `instanceof`, that makes harder to implement handling errors.
 
 ## Solution
 
 We can create custom classes for all main categories of errors:
 - for errors in network operations we may need `HttpError`;
-- for database operations `DbError`;
-- for searching operations `NotFoundError` and so on.
+- for database operations - `DbError`;
+- for searching operations - `NotFoundError` and so on;
+- for validation errors - `ValidationError`.
 
 When we create custom error classes, we:
 - get much more descriptive errors. With such types of errors it's much easier to detect the reason and the place of an error;
-- handle errors more carefully, that will allow us to understand code we write much better.
+- handle errors more carefully, that will allow us to understand code we write much better; such names as `ValidationError`, `HTTPError` makes it's easier to understand, what 
+happens in the different places of our codebase;
+- handle errors more correctly due to ability to use `instanceof`.
 
-## Requirements for Custom Errors
+## Requirements for custom errors
 
-- custom errors should extend from base Error class. We should be able to detect them by `instanceof Error`
-- custom errors should support basic error properties, base Error class supports: `message`, `name`, `stack`
-- custom errors shouldn't contain in stack internal implementation details, like CustomError class or functions-creators we can use to create custom class instances.
-- custom errors should be extendable. For this purpose we should be able
+- custom errors should extend from base Error class. We should be able to detect them by `instanceof Error`;
+- custom errors should support basic error properties, base Error class supports: `message`, `name`, `stack`;
+- custom errors shouldn't contain in stack internal implementation details, like CustomError class or functions-creators we can use to create custom class instances;
+- custom errors should be extendable. It will allow us to create subclasses inherited from main custom error class.
 
 Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have a `statusCode` property with a value like 404 or 403 or 500.
 
