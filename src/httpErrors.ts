@@ -28,21 +28,9 @@ export class HTTPError extends CustomError {
   }
 }
 
-/**
- * Contains factories for the common HTTP errors
- *
- * @namespace HTTPErrors
- */
-export const HTTPErrors = {
-  /**
-   * Creates HTTPError with 400 status code
-   *
-   * @function badRequest
-   * @memberof HTTPErrors
-   */
-  badRequest: message =>
-    new HTTPError(message, {
-      code: 400,
-      excludeFromStack: HTTPErrors.badRequest
-    })
-};
+export class BadRequestError extends CustomError {
+  constructor(message: string, config: CustomErrorConfig) {
+    super(message, config);
+    this.name = "BadRequestError";
+  }
+}
