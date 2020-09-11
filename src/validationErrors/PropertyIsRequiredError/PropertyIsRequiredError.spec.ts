@@ -1,5 +1,7 @@
-import { ValidationErrorType } from './ValidationError';
-import { PropertyIsRequiredError } from './PropertyIsRequiredError';
+import { HttpStatus } from '@j.u.p.iter/http-status';
+
+import { ValidationErrorType } from '../ValidationError';
+import { PropertyIsRequiredError } from '../PropertyIsRequiredError';
 
 describe('PropertyIsRequiredError', () => {
   it('creates an error with a correct message', () => {
@@ -17,7 +19,7 @@ describe('PropertyIsRequiredError', () => {
   it('creates an error with a correct code', () => {
     const propertyIsRequiredError = new PropertyIsRequiredError('name');
 
-    expect(propertyIsRequiredError.code).toBe(400);
+    expect(propertyIsRequiredError.code).toBe(HttpStatus.BAD_REQUEST);
   });
 
   it('creates an error with a correct context', () => {

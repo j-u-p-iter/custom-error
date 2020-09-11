@@ -1,3 +1,5 @@
+import { HttpStatus } from "@j.u.p.iter/http-status";
+
 import { CustomError, CustomErrorConfig } from "../CustomError";
 
 export enum ValidationErrorType {
@@ -7,6 +9,8 @@ export enum ValidationErrorType {
 
 export class ValidationError extends CustomError {
   constructor(message: string, config?: CustomErrorConfig) {
-    super(message, { ...config, code: 400 });
+    super(message, { ...config, code: HttpStatus.BAD_REQUEST });
+
+    this.name = "ValidationError";
   }
 }

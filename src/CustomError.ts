@@ -3,12 +3,15 @@ interface CustomErrorInterface {
   date: string;
   code?: number;
   context?: string;
+  property?: string;
+  invalidEmail?: string;
 }
 
 export interface CustomErrorConfig {
   code?: number;
   context?: string;
   property?: string;
+  invalidEmail?: string;
 }
 
 /**
@@ -32,6 +35,8 @@ export class CustomError extends Error implements CustomErrorInterface {
   public date;
   public context;
   public code;
+  public property;
+  public invalidEmail;
 
   constructor(message: string, config?: CustomErrorConfig) {
     super(message);
