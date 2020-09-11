@@ -1,8 +1,8 @@
-import { CustomErrorConfig } from "../../CustomError";
+import { BaseErrorConfig } from "../../CustomError";
 import { ValidationError, ValidationErrorType } from "../ValidationError";
 
 export class InvalidEmailError extends ValidationError {
-  constructor(invalidEmail: string, config: CustomErrorConfig = {}) {
+  constructor(invalidEmail: string, config: BaseErrorConfig = {}) {
     super(`Email ${invalidEmail} is not valid`, { ...config, invalidEmail });
 
     this.name = "InvalidEmailError";

@@ -7,9 +7,12 @@ interface CustomErrorInterface {
   invalidEmail?: string;
 }
 
-export interface CustomErrorConfig {
+export interface BaseErrorConfig {
   code?: number;
   context?: string;
+}
+
+export interface CustomErrorConfig extends BaseErrorConfig {
   property?: string;
   invalidEmail?: string;
 }
