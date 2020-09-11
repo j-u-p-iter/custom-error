@@ -1,5 +1,4 @@
-import { CustomError, CustomErrorConfig } from "../CustomError";
-import { ValidationError, ValidationErrorType } from './ValidationError';
+import { ValidationError, ValidationErrorType } from "./ValidationError";
 
 /**
  * All unique properties we assign directly in the class (like "property" property)
@@ -9,22 +8,19 @@ import { ValidationError, ValidationErrorType } from './ValidationError';
  */
 export class PropertyIsRequiredError extends ValidationError {
   constructor(private property: string, options?: any) {
-    super('Property is not found', options);
+    super(`Property ${property} is not found`, options);
 
-    this.message = this.getMessage();;
+    this.name = "PropertyIsRequiredError";
   }
 
-  private getMessage() {
-    return `Property ${this.property} is not found`;
-  }
-
-  public serialize() {
+  public serialize = () => {
     return {
       error: {
-        message: this.getMessage(),
+        message: this.message,
         type: ValidationErrorType.PROPERTY_IS_REQUIRED_ERROR,
         property: this.property,
+        context: this.context
       }
     };
-  }
+  };
 }
