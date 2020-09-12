@@ -1,1 +1,1 @@
-export * from './InvalidEmailError';
+export * from "./InvalidEmailError";

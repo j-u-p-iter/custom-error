@@ -8,7 +8,7 @@ import { ValidationError, ValidationErrorType } from "../ValidationError";
  *
  * @param {string} message An error message
  * @param {object} [config] A configuration object
- * @param {string} [config.context] The location, where error has happened 
+ * @param {string} [config.context] The location, where error has happened
  *   (like "UsersService", "UploadService" and etc.).
  *
  * @example

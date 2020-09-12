@@ -1,6 +1,6 @@
 import { HttpStatus } from "@j.u.p.iter/http-status";
 
-import { CustomError } from "../CustomError";
+import { BaseErrorConfig, CustomError } from "../CustomError";
 
 export enum ValidationErrorType {
   PROPERTY_IS_REQUIRED_ERROR = "propertyIsRequiredError",
@@ -8,10 +8,10 @@ export enum ValidationErrorType {
 }
 
 /**
- * ValidationError knows about 
+ * ValidationError knows about
  * all properties child objects have.
  */
-interface ValidationErrorConfig {
+interface ValidationErrorConfig extends BaseErrorConfig {
   property?: string;
   invalidEmail?: string;
 }
