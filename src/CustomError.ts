@@ -8,11 +8,14 @@ interface CustomErrorInterface {
 }
 
 export interface BaseErrorConfig {
-  code?: number;
   context?: string;
 }
 
+/**
+ * CustomError knows about all properties, child objects use.
+ */
 export interface CustomErrorConfig extends BaseErrorConfig {
+  code?: number;
   property?: string;
   invalidEmail?: string;
 }

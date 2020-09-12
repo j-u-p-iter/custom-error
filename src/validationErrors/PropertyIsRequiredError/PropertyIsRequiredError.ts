@@ -1,6 +1,19 @@
 import { BaseErrorConfig } from "../../CustomError";
 import { ValidationError, ValidationErrorType } from "../ValidationError";
 
+/**
+ * Create a PropertyIsRequiredError object
+ *
+ * @class
+ *
+ * @param {string} message An error message
+ * @param {object} [config] A configuration object
+ * @param {string} [config.context] The location, where error has happened 
+ *   (like "UsersService", "UploadService" and etc.).
+ *
+ * @example
+ * const propertyIsRequiredError = new PropertyIsRequiredError('photoURL', { context: 'UploadService' });
+ */
 export class PropertyIsRequiredError extends ValidationError {
   constructor(property: string, config: BaseErrorConfig = {}) {
     super(`Property ${property} is not found`, { ...config, property });
