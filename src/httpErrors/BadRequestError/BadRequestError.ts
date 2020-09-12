@@ -13,7 +13,7 @@ import { HttpError, HttpErrorType } from "../HttpError";
  *   (like "UsersService", "UploadService" and etc.).
  *
  * @example
- * const invalidEmailError = new InvalidEmailError('invalidEmail', { context: 'UsersService' });
+ * const badRequestError = new BadRequestError('Users request data is not correct', { context: 'UsersService' });
  */
 
 interface BadRequestErrorConfig {
