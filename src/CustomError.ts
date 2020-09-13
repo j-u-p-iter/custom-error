@@ -23,7 +23,7 @@ export interface CustomErrorConfig extends BaseErrorConfig {
 /**
  * Create a CustomError object
  *
- * @class
+ * @abstract
  *
  * @param {string} message An error message
  * @param {object} [config] A configuration object
