@@ -3,6 +3,11 @@ import { HttpStatus } from "@j.u.p.iter/http-status";
 import { HttpError } from "../HttpError";
 import { HttpErrorType } from "../types";
 
+
+interface BadRequestErrorConfig {
+  context?: string;
+}
+
 /**
  * Create a BadRequestError object
  *
@@ -16,11 +21,6 @@ import { HttpErrorType } from "../types";
  * @example
  * const badRequestError = new BadRequestError('Users request data is not correct', { context: 'UsersService' });
  */
-
-interface BadRequestErrorConfig {
-  context?: string;
-}
-
 export class BadRequestError extends HttpError {
   constructor(message: string, config: BadRequestErrorConfig = {}) {
     super(message, { ...config, code: HttpStatus.BAD_REQUEST });

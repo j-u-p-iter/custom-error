@@ -3,7 +3,11 @@
 <dl>
 <dt><a href="#CustomError">CustomError</a></dt>
 <dd></dd>
+<dt><a href="#BadRequestError">BadRequestError</a></dt>
+<dd></dd>
 <dt><a href="#PropertyIsRequiredError">PropertyIsRequiredError</a></dt>
+<dd></dd>
+<dt><a href="#InvalidEmailError">InvalidEmailError</a></dt>
 <dd></dd>
 </dl>
 
@@ -30,6 +34,26 @@ Create a CustomError object
 ```js
 new CustomError('Some error has happened');
 ```
+<a name="BadRequestError"></a>
+
+## BadRequestError
+**Kind**: global class  
+<a name="new_BadRequestError_new"></a>
+
+### new BadRequestError(message, [config])
+Create a BadRequestError object
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | An error message |
+| [config] | <code>object</code> | A configuration object |
+| [config.context] | <code>string</code> | The location, where error has happened   (like "UsersService", "UploadService" and etc.). |
+
+**Example**  
+```js
+const badRequestError = new BadRequestError('Users request data is not correct', { context: 'UsersService' });
+```
 <a name="PropertyIsRequiredError"></a>
 
 ## PropertyIsRequiredError
@@ -49,4 +73,24 @@ Create a PropertyIsRequiredError object
 **Example**  
 ```js
 const propertyIsRequiredError = new PropertyIsRequiredError('photoURL', { context: 'UploadService' });
+```
+<a name="InvalidEmailError"></a>
+
+## InvalidEmailError
+**Kind**: global class  
+<a name="new_InvalidEmailError_new"></a>
+
+### new InvalidEmailError(message, [config])
+Create a InvalidEmailError object
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>string</code> | An error message |
+| [config] | <code>object</code> | A configuration object |
+| [config.context] | <code>string</code> | The location, where error has happened   (like "UsersService", "UploadService" and etc.). |
+
+**Example**  
+```js
+const invalidEmailError = new InvalidEmailError('invalidEmail', { context: 'UsersService' });
 ```

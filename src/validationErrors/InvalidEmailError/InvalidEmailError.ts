@@ -1,6 +1,10 @@
 import { ValidationErrorType } from "../types";
 import { ValidationError } from "../ValidationError";
 
+interface InvalidEmailConfig {
+  context?: string;
+}
+
 /**
  * Create a InvalidEmailError object
  *
@@ -14,11 +18,6 @@ import { ValidationError } from "../ValidationError";
  * @example
  * const invalidEmailError = new InvalidEmailError('invalidEmail', { context: 'UsersService' });
  */
-
-interface InvalidEmailConfig {
-  context?: string;
-}
-
 export class InvalidEmailError extends ValidationError {
   constructor(invalidEmail: string, config: InvalidEmailConfig = {}) {
     super(`Email ${invalidEmail} is not valid`, { ...config, invalidEmail });
