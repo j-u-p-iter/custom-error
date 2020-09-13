@@ -3,7 +3,6 @@ import { HttpStatus } from "@j.u.p.iter/http-status";
 import { HttpError } from "../HttpError";
 import { HttpErrorType } from "../types";
 
-
 interface BadRequestErrorConfig {
   context?: string;
 }
