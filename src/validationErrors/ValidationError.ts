@@ -1,6 +1,6 @@
 import { HttpStatus } from "@j.u.p.iter/http-status";
 
-import { BaseErrorConfig, CustomError } from "../CustomError";
+import { BaseErrorConfig, CustomError } from "../.";
 
 export enum ValidationErrorType {
   PROPERTY_IS_REQUIRED_ERROR = "propertyIsRequiredError",

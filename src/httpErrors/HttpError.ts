@@ -1,4 +1,4 @@
-import { BaseErrorConfig, CustomError } from "../CustomError";
+import { BaseErrorConfig, CustomError } from "../.";
 
 export enum HttpErrorType {
   BAD_REQUEST_ERROR = "badRequestError"

@@ -37,7 +37,8 @@ export interface CustomErrorConfig extends BaseErrorConfig {
  * new CustomError('Some error has happened');
  */
 
-export class CustomError extends Error implements CustomErrorInterface {
+export abstract class CustomError extends Error
+  implements CustomErrorInterface {
   public date;
   public context;
   public code;
@@ -48,11 +49,13 @@ export class CustomError extends Error implements CustomErrorInterface {
     super(message);
 
     for (const key in config) {
-      if (config !== "excludeFromStack") {
+      if (config.hasOwnProperty(key)) {
         this[key] = config[key];
       }
     }
 
     this.date = new Date();
   }
+
+  serialize() {}
 }

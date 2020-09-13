@@ -1,4 +1,4 @@
-import { BaseErrorConfig } from "../../CustomError";
+import { BaseErrorConfig } from "../../.";
 import { ValidationError, ValidationErrorType } from "../ValidationError";
 
 /**

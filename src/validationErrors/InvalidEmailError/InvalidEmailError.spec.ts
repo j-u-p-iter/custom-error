@@ -1,7 +1,7 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
 import { ValidationErrorType } from '../ValidationError';
-import { InvalidEmailError } from './InvalidEmailError';
+import { InvalidEmailError } from '.';
 
 describe('InvalidEmailError', () => {
   it('creates an error with a correct message', () => {

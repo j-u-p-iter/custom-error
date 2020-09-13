@@ -1,7 +1,7 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
 import { ValidationErrorType } from '../ValidationError';
-import { PropertyIsRequiredError } from '../PropertyIsRequiredError';
+import { PropertyIsRequiredError } from '.';
 
 describe('PropertyIsRequiredError', () => {
   it('creates an error with a correct message', () => {
