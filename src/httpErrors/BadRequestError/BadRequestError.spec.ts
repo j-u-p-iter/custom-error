@@ -1,7 +1,7 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
-import { HttpErrorType } from '../HttpError';
 import { BadRequestError } from '.';
+import { HttpErrorType } from '../types';
 
 describe('BadRequestError', () => {
   let errorMessage;

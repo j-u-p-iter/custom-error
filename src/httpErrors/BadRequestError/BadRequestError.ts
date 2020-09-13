@@ -1,6 +1,7 @@
 import { HttpStatus } from "@j.u.p.iter/http-status";
 
-import { HttpError, HttpErrorType } from "../HttpError";
+import { HttpError } from "../HttpError";
+import { HttpErrorType } from "../types";
 
 /**
  * Create a BadRequestError object

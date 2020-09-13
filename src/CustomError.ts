@@ -37,8 +37,7 @@ export interface CustomErrorConfig extends BaseErrorConfig {
  * new CustomError('Some error has happened');
  */
 
-export abstract class CustomError extends Error
-  implements CustomErrorInterface {
+export class CustomError extends Error implements CustomErrorInterface {
   public date;
   public context;
   public code;

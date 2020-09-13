@@ -1,5 +1,6 @@
 import { BaseErrorConfig } from "../../.";
-import { ValidationError, ValidationErrorType } from "../ValidationError";
+import { ValidationErrorType } from "../types";
+import { ValidationError } from "../ValidationError";
 
 /**
  * Create a PropertyIsRequiredError object

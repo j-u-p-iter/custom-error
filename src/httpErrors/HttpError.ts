@@ -1,8 +1,4 @@
-import { BaseErrorConfig, CustomError } from "../.";
-
-export enum HttpErrorType {
-  BAD_REQUEST_ERROR = "badRequestError"
-}
+import { BaseErrorConfig, CustomError } from "../CustomError";
 
 interface HttpErrorConfig extends BaseErrorConfig {
   code: number;

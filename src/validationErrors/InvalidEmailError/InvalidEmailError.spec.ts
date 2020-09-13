@@ -1,6 +1,6 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
-import { ValidationErrorType } from '../ValidationError';
+import { ValidationErrorType } from '../types';
 import { InvalidEmailError } from '.';
 
 describe('InvalidEmailError', () => {
