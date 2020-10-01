@@ -2,6 +2,12 @@ import { SyntaxErrorType } from '../types';
 import { InvalidJsonError } from '.';
 
 describe('InvalidJsonError', () => {
+  it('creates an error with a correct type', () => {
+    const invalidJsonError = new InvalidJsonError('path/to/file.json');
+
+    expect(invalidJsonError instanceof InvalidJsonError).toBe(true);
+  });
+
   it('creates an error with a correct message', () => {
     const invalidJsonError = new InvalidJsonError('path/to/file.json');
 

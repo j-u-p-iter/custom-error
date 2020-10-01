@@ -26,6 +26,8 @@ export class InvalidJsonError extends SyntxError {
     });
 
     this.name = "InvalidJsonError";
+
+    Object.setPrototypeOf(this, InvalidJsonError.prototype);
   }
 
   public serialize = () => {

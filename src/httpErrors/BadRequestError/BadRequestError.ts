@@ -25,6 +25,8 @@ export class BadRequestError extends HttpError {
     super(message, { ...config, code: HttpStatus.BAD_REQUEST });
 
     this.name = "BadRequestError";
+
+    Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 
   public serialize = () => {
