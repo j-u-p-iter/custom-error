@@ -1,9 +1,20 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
+import { ValidationError } from '../ValidationError';
+import { CustomError } from '../../CustomError';
 import { ValidationErrorType } from '../types';
 import { InvalidEmailError } from '.';
 
 describe('InvalidEmailError', () => {
+  it('creates an error with a correct type', () => {
+    const invalidEmailError = new InvalidEmailError('some@email.com');
+
+    expect(invalidEmailError).toBeInstanceOf(InvalidEmailError);
+    expect(invalidEmailError).toBeInstanceOf(ValidationError);
+    expect(invalidEmailError).toBeInstanceOf(CustomError);
+    expect(invalidEmailError).toBeInstanceOf(Error);
+  });
+
   it('creates an error with a correct message', () => {
     const invalidEmailError = new InvalidEmailError('some@email.com');
 

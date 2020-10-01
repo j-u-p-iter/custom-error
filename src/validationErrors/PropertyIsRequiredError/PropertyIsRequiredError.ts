@@ -20,6 +20,8 @@ export class PropertyIsRequiredError extends ValidationError {
     super(`Property ${property} is not found`, { ...config, property });
 
     this.name = "PropertyIsRequiredError";
+
+    Object.setPrototypeOf(this, PropertyIsRequiredError.prototype);
   }
 
   public serialize = () => {

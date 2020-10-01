@@ -18,5 +18,7 @@ export class SyntxError extends CustomError {
     super(message, config);
 
     this.name = "SyntaxError";
+
+    Object.setPrototypeOf(this, SyntxError.prototype);
   }
 }

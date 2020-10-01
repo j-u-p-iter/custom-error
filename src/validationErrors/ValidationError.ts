@@ -5,6 +5,7 @@ import { BaseErrorConfig, CustomError } from "../CustomError";
 /**
  * ValidationError knows about
  * all properties child objects have.
+ *
  */
 interface ValidationErrorConfig extends BaseErrorConfig {
   property?: string;
@@ -16,5 +17,7 @@ export class ValidationError extends CustomError {
     super(message, { ...config, code: HttpStatus.BAD_REQUEST });
 
     this.name = "ValidationError";
+
+    Object.setPrototypeOf(this, ValidationError.prototype);
   }
 }

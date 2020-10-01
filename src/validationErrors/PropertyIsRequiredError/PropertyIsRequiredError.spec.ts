@@ -1,9 +1,20 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
+import { ValidationError } from '../ValidationError';
+import { CustomError } from '../../CustomError';
 import { ValidationErrorType } from '../types';
 import { PropertyIsRequiredError } from '.';
 
 describe('PropertyIsRequiredError', () => {
+  it('creates an error with a correct type', () => {
+    const propertyIsRequiredError = new PropertyIsRequiredError('name');
+
+    expect(propertyIsRequiredError).toBeInstanceOf(PropertyIsRequiredError);
+    expect(propertyIsRequiredError).toBeInstanceOf(ValidationError);
+    expect(propertyIsRequiredError).toBeInstanceOf(CustomError);
+    expect(propertyIsRequiredError).toBeInstanceOf(Error);
+  });
+
   it('creates an error with a correct message', () => {
     const propertyIsRequiredError = new PropertyIsRequiredError('name');
 

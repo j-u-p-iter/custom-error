@@ -1,6 +1,8 @@
 import { HttpStatus } from '@j.u.p.iter/http-status';
 
 import { BadRequestError } from '.';
+import { HttpError } from '../HttpError';
+import { CustomError } from '../../CustomError';
 import { HttpErrorType } from '../types';
 
 describe('BadRequestError', () => {
@@ -10,6 +12,15 @@ describe('BadRequestError', () => {
   beforeAll(() => {
     errorMessage = 'Users data is not correct';
     context = 'UsersService';
+  });
+
+  it('creates an error with a correct type', () => {
+    const badRequestError = new BadRequestError(errorMessage);
+
+    expect(badRequestError).toBeInstanceOf(BadRequestError);
+    expect(badRequestError).toBeInstanceOf(HttpError);
+    expect(badRequestError).toBeInstanceOf(CustomError);
+    expect(badRequestError).toBeInstanceOf(Error);
   });
 
   it('creates an error with a correct message', () => {

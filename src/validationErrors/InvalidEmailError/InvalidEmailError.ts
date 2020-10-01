@@ -23,6 +23,8 @@ export class InvalidEmailError extends ValidationError {
     super(`Email ${invalidEmail} is not valid`, { ...config, invalidEmail });
 
     this.name = "InvalidEmailError";
+
+    Object.setPrototypeOf(this, InvalidEmailError.prototype);
   }
 
   public serialize = () => {

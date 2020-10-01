@@ -9,5 +9,7 @@ export class HttpError extends CustomError {
     super(message, config);
 
     this.name = "HTTPError";
+
+    Object.setPrototypeOf(this, HttpError.prototype);
   }
 }

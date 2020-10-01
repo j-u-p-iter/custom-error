@@ -1,11 +1,16 @@
 import { SyntaxErrorType } from '../types';
 import { InvalidJsonError } from '.';
+import { SyntxError } from '../SyntxError';
+import { CustomError } from '../../CustomError';
 
 describe('InvalidJsonError', () => {
   it('creates an error with a correct type', () => {
     const invalidJsonError = new InvalidJsonError('path/to/file.json');
 
-    expect(invalidJsonError instanceof InvalidJsonError).toBe(true);
+    expect(invalidJsonError).toBeInstanceOf(InvalidJsonError);
+    expect(invalidJsonError).toBeInstanceOf(SyntxError);
+    expect(invalidJsonError).toBeInstanceOf(CustomError);
+    expect(invalidJsonError).toBeInstanceOf(Error);
   });
 
   it('creates an error with a correct message', () => {
