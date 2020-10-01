@@ -10,6 +10,8 @@ import { BaseErrorConfig, CustomError } from "../CustomError";
 interface ValidationErrorConfig extends BaseErrorConfig {
   property?: string;
   invalidEmail?: string;
+  invalidExtension?: string;
+  requiredExtension?: string;
 }
 
 export class ValidationError extends CustomError {
