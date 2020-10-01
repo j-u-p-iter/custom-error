@@ -5,7 +5,7 @@ import { BaseErrorConfig, CustomError } from "../CustomError";
  * all properties child objects have.
  */
 interface SyntaxErrorConfig extends BaseErrorConfig {
-  invalidJSON?: string;
+  invalidJsonPath?: string;
 }
 
 /**

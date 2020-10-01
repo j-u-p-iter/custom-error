@@ -5,6 +5,7 @@ interface CustomErrorInterface {
   context?: string;
   property?: string;
   invalidEmail?: string;
+  invalidJsonPath?: string;
 }
 
 export interface BaseErrorConfig {
@@ -18,6 +19,7 @@ export interface CustomErrorConfig extends BaseErrorConfig {
   code?: number;
   property?: string;
   invalidEmail?: string;
+  invalidJsonPath?: string;
 }
 
 /**
@@ -43,6 +45,7 @@ export class CustomError extends Error implements CustomErrorInterface {
   public code;
   public property;
   public invalidEmail;
+  public invalidJsonPath;
 
   constructor(message: string, config?: CustomErrorConfig) {
     super(message);
