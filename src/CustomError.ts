@@ -8,6 +8,7 @@ interface CustomErrorInterface {
   invalidJsonPath?: string;
   invalidExtension?: string;
   requiredExtension?: string;
+  invalidPath?: string;
 }
 
 export interface BaseErrorConfig {
@@ -24,6 +25,7 @@ export interface CustomErrorConfig extends BaseErrorConfig {
   invalidJsonPath?: string;
   invalidExtension?: string;
   requiredExtension?: string;
+  invalidPath?: string;
 }
 
 /**
@@ -52,6 +54,7 @@ export class CustomError extends Error implements CustomErrorInterface {
   public invalidJsonPath;
   public invalidExtension;
   public requiredExtension;
+  public invalidPath;
 
   constructor(message: string, config?: CustomErrorConfig) {
     super(message);
