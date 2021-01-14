@@ -11,9 +11,16 @@ There're a lot of possible categories of errors:
 
 These errors categories can be also splitted on different types.
 
-For example there're next types of the Http Error:
+For example there're next types of the `Http Error`:
 
-- Bad Request Error;
-- Not Found Error;
+- Bad Request Error type;
+- Not Found Error type.
 
 and etc.
+
+`Validation Error` can be represented with next types:
+
+- Invalid Email Error;
+- Invalid File Type Error;
+- Invalid Path Error;
+- Property Is Required Error.
