@@ -23,15 +23,18 @@ const isFilePath = (path: string): boolean => path.split(".").length > 1;
  */
 // need to detect is path to file or not in this package
 export class InvalidPathError extends ValidationError {
+  public invalidPath;
+
   constructor(invalidPath: string, config: InvalidPathConfig = {}) {
     super(
       `${
         isFilePath(invalidPath) ? "File" : "Directory"
       } ${invalidPath} does not exist`,
-      { ...config, invalidPath }
+      config
     );
 
     this.name = "InvalidPathError";
+    this.invalidPath = invalidPath;
 
     Object.setPrototypeOf(this, InvalidPathError.prototype);
   }

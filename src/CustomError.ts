@@ -1,31 +1,19 @@
 interface CustomErrorInterface {
   name: string;
-  date: string;
-  code?: number;
-  context?: string;
-  property?: string;
-  invalidEmail?: string;
-  invalidJsonPath?: string;
-  invalidExtension?: string;
-  requiredExtension?: string;
-  invalidPath?: string;
-}
-
-export interface BaseErrorConfig {
+  date: Date;
   context?: string;
 }
 
 /**
- * CustomError knows about all properties, child objects use.
+ * The common initialization error config.
+ *   We use it to set up common state for all inheriting instances:
+ *     - set up context - the name of the location, an error comes from;
+ *     - exclude implementation details from the stack with "Error.captureStackTrace".
+ *
  */
-export interface CustomErrorConfig extends BaseErrorConfig {
-  code?: number;
-  property?: string;
-  invalidEmail?: string;
-  invalidJsonPath?: string;
-  invalidExtension?: string;
-  requiredExtension?: string;
-  invalidPath?: string;
+export interface CustomErrorConfig {
+  context: string;
+  excludeFromStack: any;
 }
 
 /**
@@ -35,10 +23,7 @@ export interface CustomErrorConfig extends BaseErrorConfig {
  *
  * @param {string} message An error message
  * @param {object} [config] A configuration object
- * @param {number} [config.code] HTTP status code.
- * @param {string} [config.context] The location, where error has happened (like "UsersService", "UploadService" and etc.).
- * @param {string} [config.property] The invalid property name.
- *   [Available HTTP status codes]{@link https://github.com/j-u-p-iter/http-status/blob/master/docs/API.md}
+ * @param {string} [config.context] The location, where an error has happened (like "UsersService", "UploadService" and etc.).
  * @param {function} [config.excludeFromStack] A callback you need to exclude from the result stack.
  *
  * @example
@@ -46,15 +31,8 @@ export interface CustomErrorConfig extends BaseErrorConfig {
  */
 
 export class CustomError extends Error implements CustomErrorInterface {
-  public date;
+  public date: Date = new Date();
   public context;
-  public code;
-  public property;
-  public invalidEmail;
-  public invalidJsonPath;
-  public invalidExtension;
-  public requiredExtension;
-  public invalidPath;
 
   constructor(message: string, config?: CustomErrorConfig) {
     super(message);
@@ -65,8 +43,28 @@ export class CustomError extends Error implements CustomErrorInterface {
       }
     }
 
-    this.date = new Date();
-  }
+    /**
+     *  Without passing the excludeFromStack function to captureStackTrace, this frame
+     *  would show up in the .stack property. By passing
+     *  this function, we omit that frame, and retain all frames below it.
+     *
+     *  So, for example if we throw BadRequestError from some app.ts module
+     *    the first lines would look without the next line approximately like that:
+     *    at BadRequestError.CustomError (CustomError.ts:799:130)
+     *    at BadRequestError.HttpError [as constructor] (httpErrors/HttpError.ts:742:130)
+     *    at new BadRequestError (httpErrors/BadRequestError/BadRequestError.ts:1192:132)
+     *    at Suite.<anonymous> (app.ts:11:9)
+     *
+     *  By passing BadRequestError as an "excludeFromStack" in the config,
+     *    we'll exclude the first three lines and the first line in the stack
+     *    would be:
+     *    at Suite.<anonymous> (app.ts:11:9)
+     *
+     *  This way we're hiding implementation details from the stack, allowing
+     *    to the error consumer detect the place the error has happened more easily.
+     *
+     */
 
-  serialize() {}
+    Error.captureStackTrace(this, config.excludeFromStack);
+  }
 }

@@ -7,13 +7,7 @@ import { BaseErrorConfig, CustomError } from "../CustomError";
  * all properties child objects have.
  *
  */
-interface ValidationErrorConfig extends BaseErrorConfig {
-  property?: string;
-  invalidEmail?: string;
-  invalidExtension?: string;
-  requiredExtension?: string;
-  invalidPath?: string;
-}
+interface ValidationErrorConfig extends BaseErrorConfig {}
 
 export class ValidationError extends CustomError {
   constructor(message: string, config: ValidationErrorConfig = {}) {

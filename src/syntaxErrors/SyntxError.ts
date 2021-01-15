@@ -4,9 +4,7 @@ import { BaseErrorConfig, CustomError } from "../CustomError";
  * ValidationError knows about
  * all properties child objects have.
  */
-interface SyntaxErrorConfig extends BaseErrorConfig {
-  invalidJsonPath?: string;
-}
+interface SyntaxErrorConfig extends BaseErrorConfig {}
 
 /**
  * We name it SyntxError, cause there's already

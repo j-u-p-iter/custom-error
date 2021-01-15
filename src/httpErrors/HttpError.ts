@@ -1,8 +1,6 @@
 import { BaseErrorConfig, CustomError } from "../CustomError";
 
-interface HttpErrorConfig extends BaseErrorConfig {
-  code: number;
-}
+interface HttpErrorConfig extends BaseErrorConfig {}
 
 export class HttpError extends CustomError {
   constructor(message: string, config: HttpErrorConfig) {

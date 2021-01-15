@@ -20,6 +20,9 @@ interface InvalidFileTypeConfig {
  * const invalidFileType = new InvalidFileType('.txt', '.json', { context: 'UsersService' });
  */
 export class InvalidFileTypeError extends ValidationError {
+  public invalidExtension;
+  public requiredExtension;
+
   constructor(
     invalidExtension: string,
     requiredExtension: string,
@@ -27,10 +30,12 @@ export class InvalidFileTypeError extends ValidationError {
   ) {
     super(
       `${invalidExtension} file is not allowed. Instead you should use a ${requiredExtension} file.`,
-      { ...config, invalidExtension, requiredExtension }
+      config
     );
 
     this.name = "InvalidFileTypeError";
+    this.invalidExtension = invalidExtension;
+    this.requiredExtension = requiredExtension;
 
     Object.setPrototypeOf(this, InvalidFileTypeError.prototype);
   }

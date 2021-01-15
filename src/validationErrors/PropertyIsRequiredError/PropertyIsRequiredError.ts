@@ -16,10 +16,13 @@ import { ValidationError } from "../ValidationError";
  * const propertyIsRequiredError = new PropertyIsRequiredError('photoURL', { context: 'UploadService' });
  */
 export class PropertyIsRequiredError extends ValidationError {
+  public property;
+
   constructor(property: string, config: BaseErrorConfig = {}) {
-    super(`Property ${property} is not found`, { ...config, property });
+    super(`Property ${property} is not found`, config);
 
     this.name = "PropertyIsRequiredError";
+    this.property = property;
 
     Object.setPrototypeOf(this, PropertyIsRequiredError.prototype);
   }

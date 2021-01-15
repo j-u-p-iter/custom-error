@@ -21,10 +21,13 @@ interface BadRequestErrorConfig {
  * const badRequestError = new BadRequestError('Users request data is not correct', { context: 'UsersService' });
  */
 export class BadRequestError extends HttpError {
+  public code;
+
   constructor(message: string, config: BadRequestErrorConfig = {}) {
-    super(message, { ...config, code: HttpStatus.BAD_REQUEST });
+    super(message, { ...config, excludeFromStack: BadRequestError });
 
     this.name = "BadRequestError";
+    this.code = HttpStatus.BAD_REQUEST;
 
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }

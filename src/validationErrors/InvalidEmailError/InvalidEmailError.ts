@@ -19,10 +19,13 @@ interface InvalidEmailConfig {
  * const invalidEmailError = new InvalidEmailError('invalidEmail', { context: 'UsersService' });
  */
 export class InvalidEmailError extends ValidationError {
+  public invalidEmail;
+
   constructor(invalidEmail: string, config: InvalidEmailConfig = {}) {
-    super(`Email ${invalidEmail} is not valid`, { ...config, invalidEmail });
+    super(`Email ${invalidEmail} is not valid`, config);
 
     this.name = "InvalidEmailError";
+    this.invalidEmail = invalidEmail;
 
     Object.setPrototypeOf(this, InvalidEmailError.prototype);
   }

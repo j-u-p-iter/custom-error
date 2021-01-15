@@ -1,9 +1,6 @@
+import { CustomErrorConfig } from "../../.";
 import { SyntxError } from "../SyntxError";
 import { SyntaxErrorType } from "../types";
-
-interface InvalidJsonConfig {
-  context?: string;
-}
 
 /**
  * Create a InvalidJsonError object
@@ -19,13 +16,13 @@ interface InvalidJsonConfig {
  * const invalidJsonError = new InvalidJsonError('path/to/file.json', { context: 'JsonDatabase' });
  */
 export class InvalidJsonError extends SyntxError {
-  constructor(invalidJsonPath: string, config: InvalidJsonConfig = {}) {
-    super(`JSON data in "${invalidJsonPath}" is not valid`, {
-      ...config,
-      invalidJsonPath
-    });
+  public invalidJsonPath;
+
+  constructor(invalidJsonPath: string, config: CustomErrorConfig = {}) {
+    super(`JSON data in "${invalidJsonPath}" is not valid`, config);
 
     this.name = "InvalidJsonError";
+    this.invalidJsonPath = invalidJsonPath;
 
     Object.setPrototypeOf(this, InvalidJsonError.prototype);
   }
