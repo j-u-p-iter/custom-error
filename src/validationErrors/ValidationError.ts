@@ -12,6 +12,7 @@ interface ValidationErrorConfig extends BaseErrorConfig {
   invalidEmail?: string;
   invalidExtension?: string;
   requiredExtension?: string;
+  invalidPath?: string;
 }
 
 export class ValidationError extends CustomError {

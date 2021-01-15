@@ -3,6 +3,7 @@ import {
   InvalidJsonError,  
   InvalidEmailError,  
   InvalidFileTypeError,  
+  InvalidPathError,  
   PropertyIsRequiredError,  
 } from '../.';
 
@@ -11,6 +12,7 @@ describe('errors', () => {
     expect(BadRequestError).toBeDefined();
     expect(InvalidJsonError).toBeDefined();
     expect(InvalidEmailError).toBeDefined();
+    expect(InvalidPathError).toBeDefined();
     expect(PropertyIsRequiredError).toBeDefined();
     expect(InvalidFileTypeError).toBeDefined();
   });
