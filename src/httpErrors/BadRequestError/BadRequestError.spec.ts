@@ -11,10 +11,10 @@ describe('BadRequestError', () => {
   let context;
 
   beforeAll(() => {
-    createBadRequestError = () => {
-      errorMessage = 'Some error message';  
-      context = 'UserService';
+    errorMessage = 'Some error message';  
+    context = 'UserService';
 
+    createBadRequestError = () => {
       return new BadRequestError(errorMessage, { context });
     }
   });

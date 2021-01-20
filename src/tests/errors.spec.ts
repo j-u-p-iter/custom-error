@@ -5,6 +5,7 @@ import {
   InvalidFileTypeError,  
   InvalidPathError,  
   PropertyIsRequiredError,  
+  TSParseError,
 } from '../.';
 
 describe('errors', () => {
@@ -15,5 +16,6 @@ describe('errors', () => {
     expect(InvalidPathError).toBeDefined();
     expect(PropertyIsRequiredError).toBeDefined();
     expect(InvalidFileTypeError).toBeDefined();
+    expect(TSParseError).toBeDefined();
   });
 });
