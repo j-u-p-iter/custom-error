@@ -5,18 +5,21 @@ import { CustomError } from '../../CustomError';
 
 
 describe('TSParseError', () => {
+  let errorMessage;
   let createTSParseError;
   let pathToConfig;
   let diagnostics;
   let context;
 
   beforeAll(() => {
+    errorMessage = 'Some error message';
     pathToConfig = '/path/to/config.json';
     diagnostics = [{ error: 'Some error has happened' }];
     context = 'UsersService';
 
     createTSParseError = () => {
       return new TSParseError(
+        errorMessage,
         pathToConfig,
         diagnostics,
         { context }
@@ -36,7 +39,7 @@ describe('TSParseError', () => {
   it('creates an error with a correct message', () => {
     const tsError = createTSParseError();
 
-    expect(tsError.message).toBe(`Config ${pathToConfig} can't be parsed.`);
+    expect(tsError.message).toBe(errorMessage);
   });
 
   it('creates an error with a correct name', () => {
@@ -62,7 +65,7 @@ describe('TSParseError', () => {
 
     const expectedSerializedData = {
       error: {
-        message: `Config ${pathToConfig} can't be parsed.`,
+        message: errorMessage,
         type: TSErrorType.TS_PARSE_ERROR,
         diagnostics,
         context,

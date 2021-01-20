@@ -23,16 +23,18 @@ export class TSParseError<Diagnostics = any[]> extends TSError {
   public pathToConfig: string;
 
   constructor(
+    errorMessage,
     pathToConfig: string,
     diagnostics: Diagnostics,
     config: SubErrorConfig
   ) {
-    super(`Config ${pathToConfig} can't be parsed.`, {
+    super(errorMessage, {
       ...config,
       excludeFromStack: TSParseError
     });
 
     this.name = "TSParseError";
+
     this.pathToConfig = pathToConfig;
     this.diagnostics = diagnostics;
 
