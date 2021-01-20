@@ -1,9 +1,6 @@
+import { SubErrorConfig } from "../../.";
 import { ValidationErrorType } from "../types";
 import { ValidationError } from "../ValidationError";
-
-interface InvalidFileTypeConfig {
-  context?: string;
-}
 
 /**
  * Create a InvalidFileTypeError object
@@ -26,11 +23,11 @@ export class InvalidFileTypeError extends ValidationError {
   constructor(
     invalidExtension: string,
     requiredExtension: string,
-    config: InvalidFileTypeConfig = {}
+    config: SubErrorConfig
   ) {
     super(
       `${invalidExtension} file is not allowed. Instead you should use a ${requiredExtension} file.`,
-      config
+      { ...config, excludeFromStack: InvalidFileTypeError }
     );
 
     this.name = "InvalidFileTypeError";

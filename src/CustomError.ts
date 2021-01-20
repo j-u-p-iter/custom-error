@@ -16,6 +16,9 @@ export interface CustomErrorConfig {
   excludeFromStack: any;
 }
 
+export interface SubErrorConfig
+  extends Omit<CustomErrorConfig, "excludeFromStack"> {}
+
 /**
  * Create a CustomError object
  *
@@ -34,7 +37,7 @@ export class CustomError extends Error implements CustomErrorInterface {
   public date: Date = new Date();
   public context;
 
-  constructor(message: string, config?: CustomErrorConfig) {
+  constructor(message: string, config: CustomErrorConfig) {
     super(message);
 
     for (const key in config) {

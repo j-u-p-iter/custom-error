@@ -1,11 +1,8 @@
 import { HttpStatus } from "@j.u.p.iter/http-status";
 
+import { SubErrorConfig } from "../../.";
 import { HttpError } from "../HttpError";
 import { HttpErrorType } from "../types";
-
-interface BadRequestErrorConfig {
-  context?: string;
-}
 
 /**
  * Create a BadRequestError object
@@ -23,7 +20,7 @@ interface BadRequestErrorConfig {
 export class BadRequestError extends HttpError {
   public code;
 
-  constructor(message: string, config: BadRequestErrorConfig = {}) {
+  constructor(message: string, config: SubErrorConfig) {
     super(message, { ...config, excludeFromStack: BadRequestError });
 
     this.name = "BadRequestError";
@@ -32,7 +29,7 @@ export class BadRequestError extends HttpError {
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 
-  public serialize = () => {
+  public toJSON = () => {
     return {
       error: {
         message: this.message,

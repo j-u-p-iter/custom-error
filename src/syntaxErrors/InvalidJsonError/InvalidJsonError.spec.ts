@@ -4,8 +4,24 @@ import { SyntxError } from '../SyntxError';
 import { CustomError } from '../../CustomError';
 
 describe('InvalidJsonError', () => {
+  let createInvalidJsonError;
+  let pathToJson;
+  let context;
+
+  beforeAll(() => {
+    pathToJson = 'path/to/file.json';
+    context = 'JsonDatabase';
+
+    createInvalidJsonError = () => {
+      return new InvalidJsonError(
+        pathToJson, 
+        { context }
+      );
+    }
+  });
+
   it('creates an error with a correct type', () => {
-    const invalidJsonError = new InvalidJsonError('path/to/file.json');
+    const invalidJsonError = createInvalidJsonError();
 
     expect(invalidJsonError).toBeInstanceOf(InvalidJsonError);
     expect(invalidJsonError).toBeInstanceOf(SyntxError);
@@ -14,25 +30,25 @@ describe('InvalidJsonError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    const invalidJsonError = new InvalidJsonError('path/to/file.json');
+    const invalidJsonError = createInvalidJsonError();
 
     expect(invalidJsonError.message).toBe('JSON data in "path/to/file.json" is not valid');
   });
 
   it('creates an error with a correct name', () => {
-    const invalidJsonError = new InvalidJsonError('path/to/file.json');
+    const invalidJsonError = createInvalidJsonError();
 
     expect(invalidJsonError.name).toBe('InvalidJsonError');
   });
 
-  it('creates an error with a correct context', () => {
-    const invalidJsonError = new InvalidJsonError('path/to/file.json', { context: 'JsonDatabase' });
+  it.only('creates an error with a correct context', () => {
+    const invalidJsonError = createInvalidJsonError();
 
     expect(invalidJsonError.context).toBe('JsonDatabase');
   });
 
   it('create an error with correct serialization data', () => {
-    const invalidJsonError = new InvalidJsonError('path/to/file.json', { context: 'JsonDatabase' });
+    const invalidJsonError = createInvalidJsonError();
 
     const expectedSerializedData = {
       error: {
@@ -43,6 +59,6 @@ describe('InvalidJsonError', () => {
       }
     };
 
-    expect(invalidJsonError.serialize()).toEqual(expectedSerializedData);
+    expect(JSON.stringify(invalidJsonError)).toBe(expectedSerializedData);
   });
 });

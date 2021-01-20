@@ -1,9 +1,6 @@
+import { SubErrorConfig } from "../../.";
 import { ValidationErrorType } from "../types";
 import { ValidationError } from "../ValidationError";
-
-interface InvalidEmailConfig {
-  context?: string;
-}
 
 /**
  * Create a InvalidEmailError object
@@ -21,8 +18,11 @@ interface InvalidEmailConfig {
 export class InvalidEmailError extends ValidationError {
   public invalidEmail;
 
-  constructor(invalidEmail: string, config: InvalidEmailConfig = {}) {
-    super(`Email ${invalidEmail} is not valid`, config);
+  constructor(invalidEmail: string, config: SubErrorConfig) {
+    super(`Email ${invalidEmail} is not valid`, {
+      ...config,
+      excludeFromStack: InvalidEmailError
+    });
 
     this.name = "InvalidEmailError";
     this.invalidEmail = invalidEmail;

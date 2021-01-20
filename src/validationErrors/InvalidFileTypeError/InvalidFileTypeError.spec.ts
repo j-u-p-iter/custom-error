@@ -6,8 +6,27 @@ import { ValidationErrorType } from '../types';
 import { InvalidFileTypeError } from '.';
 
 describe('InvalidFileTypeError', () => {
+  let createInvalidFileTypeError;
+  let invalidExtension;
+  let requiredExtension;
+  let context;
+
+  beforeAll(() => {
+    invalidExtension = '.txt';
+    requiredExtension = '.json';
+    context = 'JsonDB';
+
+    createInvalidFileTypeError = () => {
+      return new InvalidFileTypeError(
+        invalidExtension, 
+        requiredExtension,
+        { context }
+      );
+    }
+  });
+
   it('creates an error with a correct type', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json');
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     expect(invalidFileTypeError).toBeInstanceOf(InvalidFileTypeError);
     expect(invalidFileTypeError).toBeInstanceOf(ValidationError);
@@ -16,31 +35,31 @@ describe('InvalidFileTypeError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json');
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     expect(invalidFileTypeError.message).toBe('.txt file is not allowed. Instead you should use a .json file.');
   });
 
   it('creates an error with a correct name', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json');
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     expect(invalidFileTypeError.name).toBe('InvalidFileTypeError');
   });
 
   it('creates an error with a correct code', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json');
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     expect(invalidFileTypeError.code).toBe(HttpStatus.BAD_REQUEST);
   });
 
   it('creates an error with a correct context', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json', { context: 'JsonDB' });
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     expect(invalidFileTypeError.context).toBe('JsonDB');
   });
 
   it('create an error with correct serialization data', () => {
-    const invalidFileTypeError = new InvalidFileTypeError('.txt', '.json', { context: 'UsersService' });
+    const invalidFileTypeError = createInvalidFileTypeError();
 
     const expectedSerializedData = {
       error: {
@@ -48,7 +67,7 @@ describe('InvalidFileTypeError', () => {
         type: ValidationErrorType.INVALID_FILE_TYPE_ERROR,
         invalidExtension: '.txt',
         requiredExtension: '.json',
-        context: 'UsersService',
+        context: 'JsonDB',
       }
     };
 

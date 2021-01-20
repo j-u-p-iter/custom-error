@@ -6,8 +6,24 @@ import { ValidationErrorType } from '../types';
 import { InvalidPathError } from '.';
 
 describe('InvalidPathError', () => {
+  let createInvalidPathError;
+
+  let invalidPathToFile;
+  let invalidPathToDirectory;
+  let context;
+
+  beforeAll(() => {
+    invalidPathToFile = '/path/to/file.json';
+    invalidPathToDirectory = '/path/to/directory';
+    context = 'UsersService';
+
+    createInvalidPathError = (invalidPath = invalidPathToFile) => {
+      return new InvalidPathError(invalidPath, { context });
+    }
+  });
+
   it('creates an error with a correct type', () => {
-    const invalidPathError = new InvalidPathError('/path/to/directory');
+    const invalidPathError = createInvalidPathError();
 
     expect(invalidPathError).toBeInstanceOf(InvalidPathError);
     expect(invalidPathError).toBeInstanceOf(ValidationError);
@@ -16,42 +32,42 @@ describe('InvalidPathError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    const invalidFilePathError = new InvalidPathError('/path/to/file.json');
+    let invalidFilePathError = createInvalidPathError(invalidPathToFile);
 
-    expect(invalidFilePathError.message).toBe('File /path/to/file.json does not exist');
+    expect(invalidFilePathError.message).toBe(`File ${invalidPathToFile} does not exist`);
 
-    const invalidDirectoryPathError = new InvalidPathError('/path/to/directory');
+    invalidFilePathError = createInvalidPathError(invalidPathToDirectory);
 
-    expect(invalidDirectoryPathError.message).toBe('Directory /path/to/directory does not exist');
+    expect(invalidFilePathError.message).toBe(`Directory ${invalidPathToDirectory} does not exist`);
   });
 
   it('creates an error with a correct name', () => {
-    const invalidPathError = new InvalidPathError('/path/to/file.json');
+    const invalidPathError = createInvalidPathError();
 
     expect(invalidPathError.name).toBe('InvalidPathError');
   });
 
   it('creates an error with a correct code', () => {
-    const invalidPathError = new InvalidPathError('/path/to/file.json');
+    const invalidPathError = createInvalidPathError();
 
     expect(invalidPathError.code).toBe(HttpStatus.BAD_REQUEST);
   });
 
   it('creates an error with a correct context', () => {
-    const invalidPathError = new InvalidPathError('/path/to/file.json', { context: 'UsersService' });
+    const invalidPathError = createInvalidPathError();
 
     expect(invalidPathError.context).toBe('UsersService');
   });
 
   it('create an error with correct serialization data', () => {
-    const invalidPathError = new InvalidPathError('/path/to/file.json', { context: 'UsersService' });
+    const invalidPathError = createInvalidPathError();
 
     const expectedSerializedData = {
       error: {
-        message: 'File /path/to/file.json does not exist',
+        context,
+        invalidPath: invalidPathToFile,
+        message: `File ${invalidPathToFile} does not exist`,
         type: ValidationErrorType.INVALID_PATH_ERROR,
-        invalidPath: '/path/to/file.json',
-        context: 'UsersService',
       }
     };
 

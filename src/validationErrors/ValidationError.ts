@@ -1,19 +1,15 @@
 import { HttpStatus } from "@j.u.p.iter/http-status";
 
-import { BaseErrorConfig, CustomError } from "../CustomError";
-
-/**
- * ValidationError knows about
- * all properties child objects have.
- *
- */
-interface ValidationErrorConfig extends BaseErrorConfig {}
+import { CustomError, CustomErrorConfig } from "../CustomError";
 
 export class ValidationError extends CustomError {
-  constructor(message: string, config: ValidationErrorConfig = {}) {
-    super(message, { ...config, code: HttpStatus.BAD_REQUEST });
+  public code;
+
+  constructor(message: string, config: CustomErrorConfig) {
+    super(message, config);
 
     this.name = "ValidationError";
+    this.code = HttpStatus.BAD_REQUEST;
 
     Object.setPrototypeOf(this, ValidationError.prototype);
   }

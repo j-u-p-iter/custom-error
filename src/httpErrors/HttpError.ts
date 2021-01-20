@@ -1,9 +1,7 @@
-import { BaseErrorConfig, CustomError } from "../CustomError";
-
-interface HttpErrorConfig extends BaseErrorConfig {}
+import { CustomError, CustomErrorConfig } from "../CustomError";
 
 export class HttpError extends CustomError {
-  constructor(message: string, config: HttpErrorConfig) {
+  constructor(message: string, config: CustomErrorConfig) {
     super(message, config);
 
     this.name = "HTTPError";

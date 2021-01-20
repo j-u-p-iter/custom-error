@@ -6,8 +6,24 @@ import { ValidationErrorType } from '../types';
 import { InvalidEmailError } from '.';
 
 describe('InvalidEmailError', () => {
+  let createInvalidEmailError;
+  let invalidEmail;
+  let context;
+
+  beforeAll(() => {
+    invalidEmail = 'some@email';
+    context = 'UsersService';
+
+    createInvalidEmailError = () => {
+      return new InvalidEmailError(
+        invalidEmail, 
+        { context }
+      );
+    }
+  });
+
   it('creates an error with a correct type', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com');
+    const invalidEmailError = createInvalidEmailError();
 
     expect(invalidEmailError).toBeInstanceOf(InvalidEmailError);
     expect(invalidEmailError).toBeInstanceOf(ValidationError);
@@ -16,38 +32,38 @@ describe('InvalidEmailError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com');
+    const invalidEmailError = createInvalidEmailError();
 
-    expect(invalidEmailError.message).toBe('Email some@email.com is not valid');
+    expect(invalidEmailError.message).toBe(`Email ${invalidEmail} is not valid`);
   });
 
   it('creates an error with a correct name', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com');
+    const invalidEmailError = createInvalidEmailError();
 
     expect(invalidEmailError.name).toBe('InvalidEmailError');
   });
 
   it('creates an error with a correct code', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com');
+    const invalidEmailError = createInvalidEmailError();
 
     expect(invalidEmailError.code).toBe(HttpStatus.BAD_REQUEST);
   });
 
   it('creates an error with a correct context', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com', { context: 'UsersService' });
+    const invalidEmailError = createInvalidEmailError();
 
     expect(invalidEmailError.context).toBe('UsersService');
   });
 
   it('create an error with correct serialization data', () => {
-    const invalidEmailError = new InvalidEmailError('some@email.com', { context: 'UsersService' });
+    const invalidEmailError = createInvalidEmailError();
 
     const expectedSerializedData = {
       error: {
-        message: 'Email some@email.com is not valid',
+        invalidEmail,
+        context,
+        message: `Email ${invalidEmail} is not valid`,
         type: ValidationErrorType.INVALID_EMAIL_ERROR,
-        invalidEmail: 'some@email.com',
-        context: 'UsersService',
       }
     };
 

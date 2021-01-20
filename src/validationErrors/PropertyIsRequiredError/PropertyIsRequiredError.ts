@@ -1,4 +1,4 @@
-import { BaseErrorConfig } from "../../.";
+import { SubErrorConfig } from "../../.";
 import { ValidationErrorType } from "../types";
 import { ValidationError } from "../ValidationError";
 
@@ -18,8 +18,11 @@ import { ValidationError } from "../ValidationError";
 export class PropertyIsRequiredError extends ValidationError {
   public property;
 
-  constructor(property: string, config: BaseErrorConfig = {}) {
-    super(`Property ${property} is not found`, config);
+  constructor(property: string, config: SubErrorConfig) {
+    super(`Property ${property} is not found`, {
+      ...config,
+      excludeFromStack: PropertyIsRequiredError
+    });
 
     this.name = "PropertyIsRequiredError";
     this.property = property;

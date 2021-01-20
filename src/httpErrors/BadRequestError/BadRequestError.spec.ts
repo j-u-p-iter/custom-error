@@ -6,16 +6,21 @@ import { CustomError } from '../../CustomError';
 import { HttpErrorType } from '../types';
 
 describe('BadRequestError', () => {
+  let createBadRequestError;
   let errorMessage;
   let context;
 
   beforeAll(() => {
-    errorMessage = 'Users data is not correct';
-    context = 'UsersService';
+    createBadRequestError = () => {
+      errorMessage = 'Some error message';  
+      context = 'UserService';
+
+      return new BadRequestError(errorMessage, { context });
+    }
   });
 
   it('creates an error with a correct type', () => {
-    const badRequestError = new BadRequestError(errorMessage);
+    const badRequestError = createBadRequestError();
 
     expect(badRequestError).toBeInstanceOf(BadRequestError);
     expect(badRequestError).toBeInstanceOf(HttpError);
@@ -24,40 +29,40 @@ describe('BadRequestError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    const badRequestError = new BadRequestError(errorMessage);
+    const badRequestError = createBadRequestError();
 
     expect(badRequestError.message).toBe(errorMessage);
   });
 
   it('creates an error with a correct name', () => {
-    const badRequestError = new BadRequestError(errorMessage);
+    const badRequestError = createBadRequestError();
 
     expect(badRequestError.name).toBe('BadRequestError');
   });
 
   it('creates an error with a correct code', () => {
-    const badRequestError = new BadRequestError(errorMessage);
+    const badRequestError = createBadRequestError();
 
     expect(badRequestError.code).toBe(HttpStatus.BAD_REQUEST);
   });
 
   it('creates an error with a correct context', () => {
-    const badRequestError = new BadRequestError(errorMessage, { context });
+    const badRequestError = createBadRequestError();
 
     expect(badRequestError.context).toBe(context);
   });
 
   it('create an error with correct serialization data', () => {
-    const badRequestError = new BadRequestError(errorMessage, { context });
+    const badRequestError = createBadRequestError();
 
     const expectedSerializedData = {
       error: {
-        context,
         message: errorMessage,
         type: HttpErrorType.BAD_REQUEST_ERROR,
+        context,
       }
     };
 
-    expect(badRequestError.serialize()).toEqual(expectedSerializedData);
+    expect(JSON.stringify(badRequestError)).toBe(JSON.stringify(expectedSerializedData));
   });
 });

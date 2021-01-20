@@ -1,4 +1,4 @@
-import { CustomErrorConfig } from "../../.";
+import { SubErrorConfig } from "../../.";
 import { SyntxError } from "../SyntxError";
 import { SyntaxErrorType } from "../types";
 
@@ -18,16 +18,20 @@ import { SyntaxErrorType } from "../types";
 export class InvalidJsonError extends SyntxError {
   public invalidJsonPath;
 
-  constructor(invalidJsonPath: string, config: CustomErrorConfig = {}) {
-    super(`JSON data in "${invalidJsonPath}" is not valid`, config);
+  constructor(invalidJsonPath: string, config: SubErrorConfig) {
+    super(`JSON data in "${invalidJsonPath}" is not valid`, {
+      ...config,
+      excludeFromStack: InvalidJsonError
+    });
 
     this.name = "InvalidJsonError";
+
     this.invalidJsonPath = invalidJsonPath;
 
     Object.setPrototypeOf(this, InvalidJsonError.prototype);
   }
 
-  public serialize = () => {
+  public toJSON = () => {
     return {
       error: {
         message: this.message,

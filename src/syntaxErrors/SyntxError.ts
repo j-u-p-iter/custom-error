@@ -1,10 +1,4 @@
-import { BaseErrorConfig, CustomError } from "../CustomError";
-
-/**
- * ValidationError knows about
- * all properties child objects have.
- */
-interface SyntaxErrorConfig extends BaseErrorConfig {}
+import { CustomError, CustomErrorConfig } from "../CustomError";
 
 /**
  * We name it SyntxError, cause there's already
@@ -12,7 +6,7 @@ interface SyntaxErrorConfig extends BaseErrorConfig {}
  *
  */
 export class SyntxError extends CustomError {
-  constructor(message: string, config: SyntaxErrorConfig = {}) {
+  constructor(message: string, config: CustomErrorConfig) {
     super(message, config);
 
     this.name = "SyntaxError";

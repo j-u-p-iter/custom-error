@@ -1,9 +1,6 @@
+import { SubErrorConfig } from "../../.";
 import { ValidationErrorType } from "../types";
 import { ValidationError } from "../ValidationError";
-
-interface InvalidPathConfig {
-  context?: string;
-}
 
 const isFilePath = (path: string): boolean => path.split(".").length > 1;
 
@@ -25,12 +22,12 @@ const isFilePath = (path: string): boolean => path.split(".").length > 1;
 export class InvalidPathError extends ValidationError {
   public invalidPath;
 
-  constructor(invalidPath: string, config: InvalidPathConfig = {}) {
+  constructor(invalidPath: string, config: SubErrorConfig) {
     super(
       `${
         isFilePath(invalidPath) ? "File" : "Directory"
       } ${invalidPath} does not exist`,
-      config
+      { ...config, excludeFromStack: InvalidPathError }
     );
 
     this.name = "InvalidPathError";
