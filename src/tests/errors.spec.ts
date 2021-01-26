@@ -6,6 +6,7 @@ import {
   InvalidPathError,  
   PropertyIsRequiredError,  
   TSParseError,
+  TSTranspileError,
 } from '../.';
 
 describe('errors', () => {
@@ -17,5 +18,6 @@ describe('errors', () => {
     expect(PropertyIsRequiredError).toBeDefined();
     expect(InvalidFileTypeError).toBeDefined();
     expect(TSParseError).toBeDefined();
+    expect(TSTranspileError).toBeDefined();
   });
 });
