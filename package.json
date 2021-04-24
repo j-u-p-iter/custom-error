@@ -16,7 +16,8 @@
     "test": "jupiter-scripts test",
     "predocs": "yarn run build",
     "docs": "jupiter-scripts docs > ./docs/API.md",
-    "validate": "jupiter-scripts validate"
+    "validate": "jupiter-scripts validate",
+    "deploy": "jupiter-scripts deploy"
   },
   "devDependencies": {
     "@j.u.p.iter/jupiter-scripts": "^1.17.0"
