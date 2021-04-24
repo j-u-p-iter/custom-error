@@ -17,8 +17,8 @@ describe('InvalidPathError', () => {
     invalidPathToDirectory = '/path/to/directory';
     context = 'UsersService';
 
-    createInvalidPathError = (invalidPath = invalidPathToFile) => {
-      return new InvalidPathError(invalidPath, { context });
+    createInvalidPathError = (invalidPath = invalidPathToFile, isFile = true) => {
+      return new InvalidPathError(invalidPath, isFile, { context });
     }
   });
 
@@ -32,11 +32,11 @@ describe('InvalidPathError', () => {
   });
 
   it('creates an error with a correct message', () => {
-    let invalidFilePathError = createInvalidPathError(invalidPathToFile);
+    let invalidFilePathError = createInvalidPathError();
 
     expect(invalidFilePathError.message).toBe(`File ${invalidPathToFile} does not exist`);
 
-    invalidFilePathError = createInvalidPathError(invalidPathToDirectory);
+    invalidFilePathError = createInvalidPathError(invalidPathToDirectory, false);
 
     expect(invalidFilePathError.message).toBe(`Directory ${invalidPathToDirectory} does not exist`);
   });
