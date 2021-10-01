@@ -7,6 +7,8 @@ import {
   PropertyIsRequiredError,  
   TSParseError,
   TSTranspileError,
+  TypesError,
+  CommonHttpError,
 } from '../.';
 
 describe('errors', () => {
@@ -19,5 +21,7 @@ describe('errors', () => {
     expect(InvalidFileTypeError).toBeDefined();
     expect(TSParseError).toBeDefined();
     expect(TSTranspileError).toBeDefined();
+    expect(TypesError).toBeDefined();
+    expect(CommonHttpError).toBeDefined();
   });
 });

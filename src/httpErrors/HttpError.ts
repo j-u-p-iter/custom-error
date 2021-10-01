@@ -4,7 +4,7 @@ export class HttpError extends CustomError {
   constructor(message: string, config: CustomErrorConfig) {
     super(message, config);
 
-    this.name = "HTTPError";
+    this.name = "HttpError";
 
     Object.setPrototypeOf(this, HttpError.prototype);
   }

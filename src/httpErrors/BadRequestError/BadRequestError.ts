@@ -21,7 +21,10 @@ export class BadRequestError extends HttpError {
   public code;
 
   constructor(message: string, config: SubErrorConfig) {
-    super(message, { ...config, excludeFromStack: BadRequestError });
+    super(message, {
+      ...config,
+      excludeFromStack: BadRequestError
+    });
 
     this.name = "BadRequestError";
     this.code = HttpStatus.BAD_REQUEST;
