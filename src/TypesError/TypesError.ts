@@ -19,7 +19,7 @@ export class TypesError extends CustomError {
   constructor(
     message: string,
     typesErrorConfig: TypesErrorConfig,
-    config: CustomErrorConfig
+    config: Omit<CustomErrorConfig, "excludeFromStack">
   ) {
     super(message, { ...config, excludeFromStack: TypesError });
 
