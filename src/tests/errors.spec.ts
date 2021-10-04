@@ -9,6 +9,7 @@ import {
   TSTranspileError,
   TypesError,
   CommonHttpError,
+  URLError,
 } from '../.';
 
 describe('errors', () => {
@@ -23,5 +24,6 @@ describe('errors', () => {
     expect(TSTranspileError).toBeDefined();
     expect(TypesError).toBeDefined();
     expect(CommonHttpError).toBeDefined();
+    expect(URLError).toBeDefined();
   });
 });

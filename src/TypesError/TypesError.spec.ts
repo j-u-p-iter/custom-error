@@ -1,6 +1,6 @@
 import { TypesError } from '.'; 
 import { CustomError } from '../CustomError';
-
+import { stringifyAndParse } from '../tests';
 
 describe('TypesError', () => {
   let createTypesError;
@@ -76,6 +76,6 @@ describe('TypesError', () => {
       }
     };
 
-    expect(JSON.stringify(typesError)).toBe(JSON.stringify(expectedSerializedData));
+    expect(stringifyAndParse(typesError)).toEqual(expectedSerializedData);
   });
 });

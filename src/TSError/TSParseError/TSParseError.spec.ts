@@ -2,7 +2,7 @@ import { TSParseError } from './TSParseError';
 import { TSError } from '../TSError';
 import { TSErrorType } from '../types';
 import { CustomError } from '../../CustomError';
-
+import { stringifyAndParse } from '../../tests';
 
 describe('TSParseError', () => {
   let errorMessage;
@@ -72,6 +72,6 @@ describe('TSParseError', () => {
       }
     };
 
-    expect(JSON.stringify(tsError)).toBe(JSON.stringify(expectedSerializedData));
+    expect(stringifyAndParse(tsError)).toEqual(expectedSerializedData);
   });
 });

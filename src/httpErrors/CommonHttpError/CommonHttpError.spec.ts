@@ -2,7 +2,7 @@ import { HttpStatus } from "@j.u.p.iter/http-status";
 import { CommonHttpError } from '.'; 
 import { CustomError } from '../../CustomError';
 import { HttpError } from '../HttpError';
-
+import { stringifyAndParse } from '../../tests';
 
 describe('CommonHttpError', () => {
   let createHttpError;
@@ -32,7 +32,7 @@ describe('CommonHttpError', () => {
     };
   });
 
-  it.only('creates an error with a correct type', () => {
+  it('creates an error with a correct type', () => {
     const httpError = createHttpError();
 
     expect(httpError).toBeInstanceOf(CommonHttpError);
@@ -50,7 +50,7 @@ describe('CommonHttpError', () => {
   it('creates an error with a correct name', () => {
     const httpError = createHttpError();
 
-    expect(httpError.name).toBe('HttpError');
+    expect(httpError.name).toBe('CommonHttpError');
   });
 
   it('creates an error with a correct code', () => {
@@ -77,13 +77,14 @@ describe('CommonHttpError', () => {
     const expectedSerializedData = {
       error: {
         message: errorMessage,
-        type: 'HttpError',
         context,
+        type: 'HTTPError',
         request,
         response,
+        code,
       }
     };
 
-    expect(JSON.stringify(httpError)).toBe(JSON.stringify(expectedSerializedData));
+    expect(stringifyAndParse(httpError)).toEqual(expectedSerializedData);
   });
 });

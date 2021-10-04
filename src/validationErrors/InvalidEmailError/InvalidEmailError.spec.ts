@@ -4,6 +4,7 @@ import { ValidationError } from '../ValidationError';
 import { CustomError } from '../../CustomError';
 import { ValidationErrorType } from '../types';
 import { InvalidEmailError } from '.';
+import { stringifyAndParse } from '../tests';
 
 describe('InvalidEmailError', () => {
   let createInvalidEmailError;

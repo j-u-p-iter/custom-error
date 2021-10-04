@@ -4,6 +4,7 @@ import { BadRequestError } from '.';
 import { HttpError } from '../HttpError';
 import { CustomError } from '../../CustomError';
 import { HttpErrorType } from '../types';
+import { stringifyAndParse } from '../../tests';
 
 describe('BadRequestError', () => {
   let createBadRequestError;
@@ -63,6 +64,6 @@ describe('BadRequestError', () => {
       }
     };
 
-    expect(JSON.stringify(badRequestError)).toBe(JSON.stringify(expectedSerializedData));
+    expect(stringifyAndParse(badRequestError)).toEqual(expectedSerializedData);
   });
 });

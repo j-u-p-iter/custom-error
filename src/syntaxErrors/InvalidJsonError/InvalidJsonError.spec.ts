@@ -2,6 +2,7 @@ import { SyntaxErrorType } from '../types';
 import { InvalidJsonError } from '.';
 import { SyntxError } from '../SyntxError';
 import { CustomError } from '../../CustomError';
+import { stringifyAndParse } from '../../tests';
 
 describe('InvalidJsonError', () => {
   let createInvalidJsonError;
@@ -41,7 +42,7 @@ describe('InvalidJsonError', () => {
     expect(invalidJsonError.name).toBe('InvalidJsonError');
   });
 
-  it.only('creates an error with a correct context', () => {
+  it('creates an error with a correct context', () => {
     const invalidJsonError = createInvalidJsonError();
 
     expect(invalidJsonError.context).toBe('JsonDatabase');
@@ -59,6 +60,6 @@ describe('InvalidJsonError', () => {
       }
     };
 
-    expect(JSON.stringify(invalidJsonError)).toBe(expectedSerializedData);
+    expect(stringifyAndParse(invalidJsonError)).toEqual(expectedSerializedData);
   });
 });
